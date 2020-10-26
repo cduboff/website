@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container bg-light">
+        <div class="col p-4 m-1">
+            <h3>Here are your recipe suggestions!</h3>
+            <a href="/">Home</a>
+            <ul>
+                {% for recipe in recipes %}
+                    <li>{{recipe.name}}</li>
+                        <ul>
+                            {% for ingredient in recipe.ingredients %}
+                                <li>{{ingredient}}</li>
+                            {% endfor %}
+                        </ul>
+                    <li>{{recipe.link}}</li>
+                {% endfor %}
+            </ul>
+            <p>Enjoy!</p>
+            <p>Want to submit other ingredients for different recipe suggestions? <a href="/search">Click Here!</a></p>
+        </div>
+    </div>
+</body>
+</html>

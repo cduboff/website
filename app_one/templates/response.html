@@ -14,15 +14,13 @@
             <a href="/">Home</a>
             <ul>
                 {% for recipe in recipes %}
-                    <li>{{recipe.name}}</li>
-                        <ul>
-                            {% for ingredient in recipe.ingredients %}
-                                <li>{{ingredient}}</li>
-                            {% endfor %}
-                        </ul>
-                    <li>{{recipe.link}}</li>
+                    <li>{{recipe.title}}</li>
+                    <li><img src="{{recipe.image}}" alt="Recipe Image"></li>
                 {% endfor %}
             </ul>
+            <!-- {% for recipe in recipes %}
+            <p>{{recipe}}</p>
+            {% endfor %} -->
             <p>Enjoy!</p>
             <p>Want to submit other ingredients for different recipe suggestions? <a href="/search">Click Here!</a></p>
         </div>

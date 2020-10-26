@@ -9,9 +9,10 @@ def search(request):
     return render(request, 'index.html')
 
 def submit(request):
-    q = request.POST['ingredients']
-    print(request.POST['ingredients'])
-    api_response = requests.get(f'https://api.spoonacular.com/recipes/findByIngredients?apiKey=242edaca2243437482a5374c764c9098&ingredients={q}').json()
+    q = request.POST['ingredients'].replace(" ", "+")
+    print(q)
+    n = request.POST['number']
+    api_response = requests.get(f'https://api.spoonacular.com/recipes/findByIngredients?apiKey=242edaca2243437482a5374c764c9098&ingredients={q}&{n}').json()
     request.session['recipes'] = api_response
     for recipe in api_response:
         print(recipe['id'])

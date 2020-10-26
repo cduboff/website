@@ -6,22 +6,22 @@
     <title>Recipes</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <div class="container bg-light">
         <div class="col p-4 m-1">
-            <h3>Here are your recipe suggestions!</h3>
             <a href="/">Home</a>
-            <ul>
+            <h3>Here are your recipe suggestions! Enjoy!</h3>
+            <ol>
                 {% for recipe in recipes %}
-                    <li>{{recipe.title}}</li>
-                    <li><img src="{{recipe.image}}" alt="Recipe Image"></li>
+                    <li>{{recipe.title}} <img id="recipe_img" src="{{recipe.image}}" alt="Recipe Image"></li>
                 {% endfor %}
-            </ul>
+            </ol>
             <!-- {% for recipe in recipes %}
             <p>{{recipe}}</p>
             {% endfor %} -->
-            <p>Enjoy!</p>
             <p>Want to submit other ingredients for different recipe suggestions? <a href="/search">Click Here!</a></p>
         </div>
     </div>

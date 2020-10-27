@@ -12,7 +12,7 @@ def submit(request):
     q = request.POST['ingredients'].replace(" ", "+")
     print(q)
     n = request.POST['number']
-    api_response = requests.get(f'https://api.spoonacular.com/recipes/findByIngredients?apiKey=242edaca2243437482a5374c764c9098&ingredients={q}&{n}').json()
+    api_response = requests.get(f'https://api.spoonacular.com/recipes/findByIngredients?apiKey=242edaca2243437482a5374c764c9098&ingredients={q}&number={n}').json()
     request.session['recipes'] = api_response
     for recipe in request.session['recipes']:
         print(recipe['id'])
@@ -31,7 +31,6 @@ def response(request):
 
 def searchByid(request, id):
     response = requests.get(f'https://api.spoonacular.com/recipes/{id}/information?apiKey=242edaca2243437482a5374c764c9098').json()
-    print(response)
     context = {
         'response': response,
     }

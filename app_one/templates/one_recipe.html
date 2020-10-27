@@ -8,13 +8,19 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    <ol>
-        <li>{{response.title}}</li> 
+    <h3>{{response.title}}</h3>
+        <ul>
+            <img id="single_recipe_img" src="{{response.image}}" alt="Recipe Image">
+            <li>Ready in: {{response.readyInMinutes}} minutes</li>
+            <li>Servings: {{response.servings}}</li>
+            <li>Dishtype:</li>
             <ul>
-                <img id="single_recipe_img" src="{{response.image}}" alt="Recipe Image">
-                <li>{{response.summary}}</li>
+                {% for type in response.dishTypes %}
+                <li>{{type}}</li>
+                {% endfor %}
             </ul>
-    </ol>
+            <li><a href="{{response.sourceUrl}}">Link to Recipe</a></li>
+        </ul>
     <a href="/"></a>
 </body>
 </html>

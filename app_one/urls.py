@@ -8,4 +8,7 @@ urlpatterns = [
     path('submit', views.submit),
     path('response', views.response),
     path('create_meal_plan', views.create),
+    path('register', views.register),
+    path('login', views.login),
+    path('user_home', views.user_home),
 ]

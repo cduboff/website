@@ -4,3 +4,6 @@
 #single_recipe_img{
     width: 150px;
 }
+div#login {
+    display: none;
+}

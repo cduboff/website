@@ -61,11 +61,11 @@ def submit(request):
     q = request.POST['ingredients'].replace(" ", "+")
     print(q)
     n = request.POST['number']
-    api_response = requests.get(f'https://api.spoonacular.com/recipes/findByIngredients?apiKey={secret.api_key}&ingredients={q}&number={n}').json()
+    api_response = requests.get(f'https://api.spoonacular.com/recipes/complexSearch?apiKey={secret.api_key}&includeIngredients={q}&number={n}&intolerances=gluten').json()
     request.session['recipes'] = api_response
     print(request.session['recipes'])
     for recipe in request.session['recipes']:
-        print(recipe['id'])
+        # print(recipe['id'])
         print(recipe)
     return redirect(f'/response')
 
@@ -81,6 +81,14 @@ def searchByid(request, id):
         'response': response,
     }
     return render(request, 'one_recipe.html', context)
+
+def similar_recipe(request, id):
+    response = requests.get(f'https://api.spoonacular.com/recipes/{id}/similar?apiKey={secret.api_key}&number=10').json()
+    print(response)
+    context = {
+        'response': response,
+    }
+    return render(request, 'similar_recipes.html', context)
 
 def create(request):
     user = User.objects.get(id=request.session['user_id'])

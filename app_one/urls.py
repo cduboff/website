@@ -11,4 +11,5 @@ urlpatterns = [
     path('register', views.register),
     path('login', views.login),
     path('user_home', views.user_home),
+    path('get_similar/<int:id>', views.similar_recipe),
 ]

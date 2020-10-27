@@ -7,6 +7,8 @@ from . import secret
 
 # Create your views here.
 def index(request):
+    if User in request.session:
+        request.session.flush()
     return render(request, 'home.html')
 
 def register(request):

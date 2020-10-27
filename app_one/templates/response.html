@@ -14,9 +14,14 @@
         <div class="col p-4 m-1">
             <a href="/">Home</a>
             <h3>Here are your recipe suggestions! Enjoy!</h3>
+            <!-- <ol>
+                {% for ingredient in ingredients %}
+                    <li>{{ingredient.title}} <img id="recipe_img" src="{{recipe.image}}" alt="Recipe Image"></li>
+                {% endfor %}
+            </ol> -->
             <ol>
                 {% for recipe in recipes %}
-                    <li>{{recipe.title}} <img id="recipe_img" src="{{recipe.image}}" alt="Recipe Image"></li>
+                    <li>{{recipe.title}} <img id="recipe_img" src="{{recipe.image}}" alt="Recipe Image"><a href="/search/{{recipe.id}}">See recipe</a></li>
                 {% endfor %}
             </ol>
             <!-- {% for recipe in recipes %}

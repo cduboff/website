@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 import requests
-from .models import User, Liked
+from .models import User
 from django.contrib import messages
 import bcrypt
 from . import secret
@@ -49,7 +49,7 @@ def login(request):
 
 def user_home(request):
     context = {
-        'saved': Liked.objects.all(),
+        # 'saved': Liked.objects.all(),
         'user': User.objects.get(id=request.session['user_id'])
     }
     return render(request, 'user_home.html', context)
@@ -61,7 +61,7 @@ def submit(request):
     q = request.POST['ingredients'].replace(" ", "+")
     print(q)
     n = request.POST['number']
-    api_response = requests.get(f'https://api.spoonacular.com/recipes/complexSearch?apiKey={secret.api_key}&includeIngredients={q}&number={n}&intolerances=gluten').json()
+    api_response = requests.get(f'https://api.spoonacular.com/recipes/findByIngredients?apiKey={secret.api_key}&ingredients={q}&number={n}').json()
     request.session['recipes'] = api_response
     print(request.session['recipes'])
     for recipe in request.session['recipes']:
@@ -91,12 +91,4 @@ def similar_recipe(request, id):
     return render(request, 'similar_recipes.html', context)
 
 def create(request):
-    user = User.objects.get(id=request.session['user_id'])
-    json = {
-    "username": user.username,
-    "firstName": user.first_name,
-    "lastName": user.last_name,
-    "email": user.email_address,
-    }
-    print(json)
-    return redirect(f'https://api.spoonacular.com/users/connect?apiKey={secret.api_key}&{json}')
+    return redirect(f'https://api.spoonacular.com/users/connect?apiKey={secret.api_key}')

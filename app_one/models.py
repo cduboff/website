@@ -41,11 +41,6 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
 
-class Liked(models.Model):
-    liked = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
 class Spoonacular(models.Model):
     username = models.CharField(max_length=255)
     hash = models.CharField(max_length=255)

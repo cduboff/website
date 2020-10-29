@@ -1,12 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Meal Plan</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
+
 <body>
-    <h4>Placeholder to create meal plan</h4>
-    <a href="/">Home</a>
+    <div class="container bg-light">
+        <form action="/create_meal_plan" method="POST">
+            {% csrf_token %}
+            <div class="form-group" id="days">
+                <label for="days">Select day of the week</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="day" id="sun">
+                    <label class="form-check-label" for="sun">Sunday</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="day" id="mon">
+                    <label class="form-check-label" for="mon">Monday</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="day" id="tues">
+                    <label class="form-check-label" for="sun">Tuesday</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="day" id="wed">
+                    <label class="form-check-label" for="wed">Wednesday</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="day" id="thurs">
+                    <label class="form-check-label" for="thurs">Thursday</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="day" id="fri">
+                    <label class="form-check-label" for="fri">Friday</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="day" id="sat">
+                    <label class="form-check-label" for="sat">Saturday</label>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
+
 </html>

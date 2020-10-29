@@ -91,4 +91,7 @@ def similar_recipe(request, id):
     return render(request, 'similar_recipes.html', context)
 
 def create(request):
-    requests.post(f'https://api.spoonacular.com/users/connect?apiKey={secret.api_key}')
+    if request.method == 'GET':
+        return render(request, 'create_plan.html')
+    if request.method == 'POST':
+        return HttpResponse('This is a post request')

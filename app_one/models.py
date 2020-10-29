@@ -41,9 +41,23 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
 
-class Spoonacular(models.Model):
-    username = models.CharField(max_length=255)
-    hash = models.CharField(max_length=255)
-    account = models.ForeignKey(User, related_name="user", on_delete=models.CASCADE)
+class Weeks(models.Model):
+    week_num = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Days(models.Model):
+    day_of_week = models.CharField(max_length=255)
+    week =  models.ForeignKey(Weeks, related_name="days", on_delete = models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Meal(models.Model):
+    main_dish = models.TextField()
+    side_one = models.TextField()
+    side_two = models.TextField()
+    side_three = models.TextField()
+    drink = models.CharField(max_length=255)
+    days = models.ManyToManyField(Days, related_name="meal")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

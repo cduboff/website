@@ -91,4 +91,4 @@ def similar_recipe(request, id):
     return render(request, 'similar_recipes.html', context)
 
 def create(request):
-    return redirect(f'https://api.spoonacular.com/users/connect?apiKey={secret.api_key}')
+    requests.post(f'https://api.spoonacular.com/users/connect?apiKey={secret.api_key}')

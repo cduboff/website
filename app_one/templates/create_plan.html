@@ -13,13 +13,14 @@
     <div class="container bg-light">
         <form action="/create_meal_plan" method="POST">
             {% csrf_token %}
+            <h3>Create Meal Plan</h3>
             <div class="form-group">
                 <label for="week">Choose a week:</label>
                 <input type="week" name="week">
             </div>
             <div class="form-group">
                 <label for="day">Select a day of the week</label>
-                <select name="day" class="form-control col-2" id="day">
+                <select name="day" class="form-control form-control-sm col-2" id="day">
                     <option>Sunday</option>
                     <option>Monday</option>
                     <option>Tuesday</option>

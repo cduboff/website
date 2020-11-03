@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 import requests
-from .models import User
+from .models import User, Likes, Weeks, Days, Meal
 from django.contrib import messages
 import bcrypt
 from . import secret
@@ -49,7 +49,7 @@ def login(request):
 
 def user_home(request):
     context = {
-        # 'saved': Liked.objects.all(),
+        'saved': Likes.objects.all(),
         'user': User.objects.get(id=request.session['user_id'])
     }
     return render(request, 'user_home.html', context)
@@ -94,4 +94,10 @@ def create(request):
     if request.method == 'GET':
         return render(request, 'create_plan.html')
     if request.method == 'POST':
+        # Create new meal plan
         return HttpResponse('This is a post request')
+
+def like(request, id):
+    liked = Likes.objects.create(user=User.objects.get(id=request.session['user_id']), recipe=id)
+    print(liked)
+    return redirect('/response')

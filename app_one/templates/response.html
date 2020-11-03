@@ -8,25 +8,31 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $("#more_info").click(function(){
+            $("#login").slideDown();
+        });
+    });
+    </script>
 </head>
 <body>
     <div class="container bg-light">
         <div class="col p-4 m-1">
             <a href="/">Home</a>
             <h3>Here are your recipe suggestions! Enjoy!</h3>
-            <!-- <ol>
-                {% for ingredient in ingredients %}
-                    <li>{{ingredient.title}} <img id="recipe_img" src="{{recipe.image}}" alt="Recipe Image"></li>
-                {% endfor %}
-            </ol> -->
             <ol>
                 {% for recipe in recipes %}
-                    <li>{{recipe.title}} <img id="recipe_img" src="{{recipe.image}}" alt="Recipe Image"><a href="/search/{{recipe.id}}">See recipe</a></li>
+                    <li>{{recipe.title}} 
+                        <!-- <div id="more_info">
+                            <p><a href="#">See More Info</a></p>
+                        </div> -->
+                    </li>
+                    <!-- make a button to see more about the recipe. onClick() should result in another call to the API which returns the detailed info about the recipe. This info should load immediately under the recipe and include a link to the single recipe page and a link to favorite/like the recipe -->
+                    <p><a href="/search/{{recipe.id}}">See recipe</a> | <a href="/like/{{recipe.id}}">Like</a></p>
                 {% endfor %}
             </ol>
-            <!-- {% for recipe in recipes %}
-            <p>{{recipe}}</p>
-            {% endfor %} -->
             <p>Want to submit other ingredients for different recipe suggestions? <a href="/search">Click Here!</a></p>
         </div>
     </div>

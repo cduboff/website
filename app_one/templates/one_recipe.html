@@ -26,9 +26,8 @@
             {% autoescape off %}
             <li>{{response.summary}}</li>
             {% endautoescape %}
-            <li><a href="{{response.sourceUrl}}">Link to Recipe</a></li>
-            <li><a href="/get_similar/{{response.id}}">Find Similar Recipes!</a></li>
         </ul>
+            <p><a href="{{response.sourceUrl}}">Link to Recipe</a> | <a href="/like/{{recipe.id}}">Like</a> | <a href="/get_similar/{{response.id}}">Find Similar Recipes!</a></p>
     </div>
 </body>
 </html>

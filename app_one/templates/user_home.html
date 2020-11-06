@@ -13,17 +13,17 @@
             <div class="col p-4 m-1">
                 <p><a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a></p>
                 <h3>Welcome {{request.session.name}}</h3>
-                <p>Saved Recipes:</p>
-                <ul>
+                {% for recipe in saved %}
                     {% if recipe not in saved %}
-                    <li>No saved recipes. Search <a href="/search">Here!</a></li>
+                    <p>No saved recipes. Search <a href="/search">Here!</a></p>
+                    {% else %}
+                    <p>Saved Recipes:</p>
+                        <ul>
+                            <p>testing</p>
+                            <li>{{recipe.id}}</li>
+                        </ul>
                     {% endif %}
-                    {% if recipe in saved %}
-                        {% for recipe in saved %}
-                        <li>{{recipe.title}}</li>
-                        {% endfor %}
-                    {% endif %}
-                </ul>
+                {% endfor %}
                 <p><a href="/">Home</a> | <a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a></p>
             </div>
         </div>

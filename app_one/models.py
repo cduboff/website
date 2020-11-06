@@ -37,10 +37,15 @@ class User(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField(max_length=25)
     confirm_password = models.CharField(max_length=25)
-    likes = models.ManyToManyField(User, related_name="likes")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
+
+class Saved(models.Model):
+    recipe = models.IntegerField()
+    user = models.ForeignKey(User, related_name="saved", on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class Weeks(models.Model):
     week_num = models.TextField()

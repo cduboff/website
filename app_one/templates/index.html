@@ -11,7 +11,11 @@
     <div class="container bg-light">
         <div class="row">
             <div class="col p-4 m-1">
-                <p><a href="/">Home</a> | Welcome, <a href="/user_home">{{request.session.name}}</a></p>
+                <p><a href="/">Home</a> 
+                    {% if user in request.session %}
+                        | Welcome, <a href="/user_home">{{request.session.name}}</a>
+                    {% endif %}
+                </p>
                 <form action="/submit" method="POST">
                     {% csrf_token %}
                     <h5>Submit up to 50 ingredients separated by commas and choose the desired number of recipes</h5>

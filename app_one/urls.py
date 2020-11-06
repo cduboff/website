@@ -12,5 +12,6 @@ urlpatterns = [
     path('login', views.login),
     path('user_home', views.user_home),
     path('get_similar/<int:id>', views.similar_recipe),
-    path('like/<int:id>', views.like)
+    path('like/<int:id>', views.like),
+    path('logout', views.logout),
 ]

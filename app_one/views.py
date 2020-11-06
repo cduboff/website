@@ -8,7 +8,7 @@ from . import secret
 # Create your views here.
 def index(request):
     if User in request.session:
-        request.session.flush()
+        return redirect('/logout')
     return render(request, 'home.html')
 
 def register(request):
@@ -91,6 +91,8 @@ def similar_recipe(request, id):
     return render(request, 'similar_recipes.html', context)
 
 def create(request):
+    if User not in request.session:
+        return redirect('/')
     if request.method == 'GET':
         return render(request, 'create_plan.html')
     if request.method == 'POST':
@@ -101,3 +103,7 @@ def like(request, id):
     saved_recipe = Saved.objects.create(recipe=id, user=User.objects.get(id=request.session['user_id']))
     print(saved_recipe)
     return redirect('/response')
+
+def logout(request):
+    request.session.flush()
+    return redirect('/')

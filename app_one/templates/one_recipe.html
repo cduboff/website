@@ -27,7 +27,11 @@
             <li>{{response.summary}}</li>
             {% endautoescape %}
         </ul>
-            <p><a href="{{response.sourceUrl}}">Link to Recipe</a> | <a href="/like/{{recipe.id}}">Like</a> | <a href="/get_similar/{{response.id}}">Find Similar Recipes!</a></p>
+            <p><a href="{{response.sourceUrl}}">Link to Recipe</a> 
+                {% if user in request.session %}
+                | <a href="/like/{{recipe.id}}">Like</a> 
+                {% endif %}
+                | <a href="/get_similar/{{response.id}}">Find Similar Recipes!</a></p>
     </div>
 </body>
 </html>

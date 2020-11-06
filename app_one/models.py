@@ -30,6 +30,12 @@ class UserManager(models.Manager):
         user = users[0]
         return bcrypt.checkpw(password.encode(), user.password.encode())
 
+class SavedManager(models.Manager):
+    def authenticate(self, recipe):
+        saved = self.filter(recipe=recipe)
+        if not saved:
+            return False
+
 class User(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -46,6 +52,7 @@ class Saved(models.Model):
     user = models.ForeignKey(User, related_name="saved", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = SavedManager()
 
 class Weeks(models.Model):
     week_num = models.TextField()

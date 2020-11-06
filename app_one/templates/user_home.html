@@ -13,7 +13,10 @@
             <div class="col p-4 m-1">
                 <p><a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a> | <a href="/logout">Logout</a></p>
                 <h3>Welcome {{request.session.name}}</h3>
-                {% for recipe in saved %}
+                {% if saved %}
+                    {% for recipe in saved %}
+                        <p>{{recipe.recipe}}</p>
+                    {% endfor %}
                     {% if recipe not in saved %}
                     <p>No saved recipes. Search <a href="/search">Here!</a></p>
                     {% else %}
@@ -23,7 +26,7 @@
                             <li>{{recipe.id}}</li>
                         </ul>
                     {% endif %}
-                {% endfor %}
+                {% endif %}
                 <p><a href="/">Home</a> | <a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a></p>
             </div>
         </div>

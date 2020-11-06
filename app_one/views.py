@@ -100,6 +100,8 @@ def create(request):
         return HttpResponse('This is a post request')
 
 def like(request, id):
+    if not Saved.objects.authenticate(recipe=id):
+        messages.error(request, 'Already saved this recipe!')
     saved_recipe = Saved.objects.create(recipe=id, user=User.objects.get(id=request.session['user_id']))
     print(saved_recipe)
     return redirect('/response')

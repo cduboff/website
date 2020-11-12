@@ -6,6 +6,12 @@
     <title>User Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            
+        });
+    </script>
 </head>
 <body>
     <div class="container bg-light">
@@ -13,21 +19,23 @@
             <div class="col p-4 m-1">
                 <p><a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a> | <a href="/logout">Logout</a></p>
                 <h3>Welcome {{request.session.name}}</h3>
-                {% if saved %}
-                    {% for recipe in saved %}
-                        <p>{{recipe.recipe}}</p>
-                    {% endfor %}
-                    {% if recipe not in saved %}
-                    <p>No saved recipes. Search <a href="/search">Here!</a></p>
-                    {% else %}
-                    <p>Saved Recipes:</p>
+                <div id="rec">
+                    {% if saved %}
+                        {% for recipe in saved %}
+                        <a href="#"><p>{{recipe.recipe}}</p></a>
+                        {% endfor %}
+                        {% if recipe not in saved %}
+                        <p>No saved recipes. Search <a href="/search">Here!</a></p>
+                        {% else %}
+                        <p>Saved Recipes:</p>
                         <ul>
                             <p>testing</p>
                             <li>{{recipe.id}}</li>
                         </ul>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
-                <p><a href="/">Home</a> | <a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a></p>
+                    <p><a href="/">Home</a> | <a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a></p>
+                </div>
             </div>
         </div>
     </div>

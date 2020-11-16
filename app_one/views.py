@@ -32,14 +32,14 @@ def login(request):
     if request.method == 'GET':
         return redirect('/')
     if not User.objects.authenticate(request.POST['username'], request.POST['password']):
-        print(request.POST['username'], request.POST['password'])
+        # print(request.POST['username'], request.POST['password'])
         messages.error(request, 'Invalid Username or Password')
     if request.method == 'POST':
         logged_user = User.objects.filter(username=request.POST['username'])
-        print(logged_user)
+        # print(logged_user)
         if len(logged_user) > 0:
             logged_user = logged_user[0]
-            print(logged_user.password)
+            # print(logged_user.password)
             if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
                 print(logged_user.password)
                 request.session['name'] = logged_user.first_name + ' ' + logged_user.last_name
@@ -63,10 +63,10 @@ def submit(request):
     n = request.POST['number']
     api_response = requests.get(f'https://api.spoonacular.com/recipes/findByIngredients?apiKey={secret.api_key}&ingredients={q}&number={n}').json()
     request.session['recipes'] = api_response
-    print(request.session['recipes'])
-    for recipe in request.session['recipes']:
-        # print(recipe['id'])
-        print(recipe)
+    # print(request.session['recipes'])
+    # for recipe in request.session['recipes']:
+    #     # print(recipe['id'])
+    #     print(recipe)
     return redirect(f'/response')
 
 def response(request):

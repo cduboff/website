@@ -9,9 +9,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-            $("#more_info").click(function(){
-                $("this").get(function({(f'https://api.spoonacular.com/recipes/{{recipe.recipe}}/information?apiKey={secret.api_key}'));
+            $("#more_info").click(function(event){
+                console.log("submitting request")
+                $.ajax({
+                    url: '/find_recipe/' + globalThis.document.body,
+                    method: 'GET'
+                }).done(function(res) {
+                    console.log(res)
+                    $('#search_results').html(res)
                 });
+                return false
             });
         });
     </script>
@@ -26,7 +33,10 @@
                     {% if saved %}
                         {% for recipe in saved %}
                         <div id="more_info">
-                            <a href="/find_recipe/{{recipe.recipe}}"><p>{{recipe.recipe}}</p></a>
+                            <a href=#><p>{{recipe.recipe}}</p></a>
+                        </div>
+                        <div id="search_results">
+                            <p></p>
                         </div>
                         {% endfor %}
                         {% if recipe not in saved %}

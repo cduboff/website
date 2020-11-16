@@ -9,7 +9,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-            
+            $("#more_info").click(function(){
+                $("this").get(function({(f'https://api.spoonacular.com/recipes/{{recipe.recipe}}/information?apiKey={secret.api_key}'));
+                });
+            });
         });
     </script>
 </head>
@@ -22,7 +25,9 @@
                 <div id="rec">
                     {% if saved %}
                         {% for recipe in saved %}
-                        <a href="#"><p>{{recipe.recipe}}</p></a>
+                        <div id="more_info">
+                            <a href="/find_recipe/{{recipe.recipe}}"><p>{{recipe.recipe}}</p></a>
+                        </div>
                         {% endfor %}
                         {% if recipe not in saved %}
                         <p>No saved recipes. Search <a href="/search">Here!</a></p>

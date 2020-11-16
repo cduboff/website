@@ -109,3 +109,7 @@ def like(request, id):
 def logout(request):
     request.session.flush()
     return redirect('/')
+
+def find_recipe(request, id):
+    request.session['response'] = requests.get(f'https://api.spoonacular.com/recipes/{id}/information?apiKey={secret.api_key}').json()
+    return redirect('user_home')

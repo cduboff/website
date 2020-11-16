@@ -14,4 +14,5 @@ urlpatterns = [
     path('get_similar/<int:id>', views.similar_recipe),
     path('like/<int:id>', views.like),
     path('logout', views.logout),
+    path('find_recipe/<int:id>', views.find_recipe),
 ]

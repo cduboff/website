@@ -11,8 +11,9 @@
         $(document).ready(function(){
             $("#more_info").click(function(event){
                 console.log("submitting request")
+                let search_id = recipe[]
                 $.ajax({
-                    url: '/find_recipe/' + globalThis.document.body,
+                    url: '/find_recipe/' + search_id,
                     method: 'GET'
                 }).done(function(res) {
                     console.log(res)
@@ -29,28 +30,28 @@
             <div class="col p-4 m-1">
                 <p><a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a> | <a href="/logout">Logout</a></p>
                 <h3>Welcome {{request.session.name}}</h3>
-                <div id="rec">
-                    {% if saved %}
-                        {% for recipe in saved %}
-                        <div id="more_info">
-                            <a href=#><p>{{recipe.recipe}}</p></a>
-                        </div>
-                        <div id="search_results">
-                            <p></p>
-                        </div>
-                        {% endfor %}
-                        {% if recipe not in saved %}
-                        <p>No saved recipes. Search <a href="/search">Here!</a></p>
-                        {% else %}
-                        <p>Saved Recipes:</p>
-                        <ul>
-                            <p>testing</p>
-                            <li>{{recipe.id}}</li>
-                        </ul>
+                        <div id="rec">
+                        {% if saved %}
+                            {% for recipe in saved %}
+                                <div id="more_info">
+                                    <a href=#><p>{{recipe.recipe}}</p></a>
+                                </div>
+                                <div id="search_results">
+                                    <p></p>
+                                </div>
+                            {% endfor %}
+                            {% if recipe not in saved %}
+                                <p>No saved recipes. Search <a href="/search">Here!</a></p>
+                            {% else %}
+                                <p>Saved Recipes:</p>
+                                <ul>
+                                    <p>testing</p>
+                                    <li>{{recipe.id}}</li>
+                                </ul>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                    <p><a href="/">Home</a> | <a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a></p>
-                </div>
+                        <p><a href="/">Home</a> | <a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a></p>
+                    </div>
             </div>
         </div>
     </div>

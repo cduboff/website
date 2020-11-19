@@ -3,7 +3,7 @@ import requests
 from .models import User, Saved, Weeks, Days, Meal
 from django.contrib import messages
 import bcrypt
-from . import secret
+from . import secret    
 
 # Create your views here.
 def index(request):
@@ -112,4 +112,6 @@ def logout(request):
 
 def find_recipe(request, id):
     res = requests.get(f'https://api.spoonacular.com/recipes/{id}/information?apiKey={secret.api_key}').json()
+    print(res)
+    print("recieved response", res)
     return res

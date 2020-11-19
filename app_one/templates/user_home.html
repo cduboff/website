@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {% block javascript %}
     <script>
         $(document).ready(function () {
             $("#more_info").click(function (event) {
                 console.log("submitting request")
+                var recipe_id = (document.getElementById('recipe.id').textContent);
                 $.ajax({
-                    url: '/find_recipe/550146',
+                    url: '/find_recipe/' + recipe_id,
                     method: 'GET'
-                }).done(function (res) {
+                }).done(function () {
                     console.log(res)
                     $('#search_results').html(res)
                 });
@@ -23,6 +25,7 @@
             });
         });
     </script>
+    {% endblock javascript %}
 </head>
 
 <body>
@@ -36,12 +39,10 @@
                     {% for recipe in saved %}
                     <div id="more_info">
                         <a href=#>
-                            <p>{{recipe.recipe}}</p>
+                            <p id='recipe.id'>{{recipe.recipe}}</p>
                         </a>
                     </div>
-                    <div id="search_results">
-                        <p></p>
-                    </div>
+                    <div id="search_results"></div>
                     {% endfor %}
                     {% if recipe not in saved %}
                     <p>No saved recipes. Search <a href="/search">Here!</a></p>

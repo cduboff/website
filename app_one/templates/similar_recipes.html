@@ -13,12 +13,12 @@
     <div class="container bg-light">
         <div class="row">
             <div class="col p-4 m-1">
-                <p><a href="/">Home</a> | <a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a>
+                <p><a href="/user_home">Home</a> | <a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a>
                 </p>
                 <h3>Welcome {{request.session.name}}</h3>
                 <ul>
                     {% for i in response %}
-                        <li>{{i.title}} <img id="recipe_img" src="{{i.image}}" alt="Recipe Image"><a href="/search/{{i.id}}">See recipe</a></li>
+                        <li>{{i.title}} <a href="/search/{{i.id}}">See recipe</a></li>
                     {% endfor %}
                 </ul>
             </div>

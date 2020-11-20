@@ -112,8 +112,8 @@ def logout(request):
 
 def find_recipe(request, id):
     response = requests.get(f'https://api.spoonacular.com/recipes/{id}/information?apiKey={secret.api_key}').json()
-    print(response)
+    print("Success!")
     context = {
         'response': response,
     }
-    return render(request, 'partials/ajax_response', context)
+    return render(request, 'ajax_response.html', context)

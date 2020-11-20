@@ -36,9 +36,8 @@
                     {% if saved %}
                     {% for recipe in saved %}
                     <div id="more_info">
-                        <a href=#>
-                            <p id='recipe.id'>{{recipe.recipe}}</p>
-                        </a>
+                        <p hidden id='recipe.id'>{{recipe.recipe}}</p>
+                        <p>{{recipe.name}} <a href=# class="font-weight-light">See more</a></p>
                     </div>
                     <div id="search_results"></div>
                     {% endfor %}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,16 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
+
 <body>
     <div class="container bg-light">
-        <h3>{{response.title}} <img id="single_recipe_img" src="{{response.image}}" alt="Recipe Image"></h3>
-            {% autoescape off %}
-            <p>Summary: {{response.summary}}</p>
-            {% endautoescape %}
-            <p><a href="{{response.sourceUrl}}">Link to Recipe</a> | <a href="/get_similar/{{response.id}}">Find Similar Recipes!</a></p>
+        <h5>{{response.title}}</h5>
+        <img id="single_recipe_img" src="{{response.image}}" alt="Recipe Image">
+        {% autoescape off %}
+        <p>Instructions: {{response.instructions}}</p>
+        {% endautoescape %}
+        <p><a href="{{response.sourceUrl}}">Link to Recipe</a> | <a href="/get_similar/{{response.id}}">Find Similar Recipes!</a></p>
     </div>
 </body>
+
 </html>

@@ -9,7 +9,7 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function () {
+         $(document).ready(function () {
             $("#more_info").click(function (event) {
                 console.log("clicked on link")
                 console.log("submitting request")
@@ -18,7 +18,6 @@
                     url: '/find_recipe/' + recipe_id,
                     method: 'GET'
                 }).done(function (response) {
-                    console.log(response)
                     $('#search_results').html(response)
                 });
                 return false
@@ -43,15 +42,6 @@
                     </div>
                     <div id="search_results"></div>
                     {% endfor %}
-                    {% if recipe not in saved %}
-                    <p>No saved recipes. Search <a href="/search">Here!</a></p>
-                    {% else %}
-                    <p>Saved Recipes:</p>
-                    <ul>
-                        <p>testing</p>
-                        <li>{{recipe.id}}</li>
-                    </ul>
-                    {% endif %}
                     {% endif %}
                     <p><a href="/">Home</a> | <a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a></p>
                 </div>

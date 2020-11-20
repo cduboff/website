@@ -4,24 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <div class="container bg-light">
-        <h3>{{response.title}}</h3>
-        <img id="single_recipe_img" src="{{response.image}}" alt="Recipe Image">
-        <ul>
-            <li>Ready in: {{response.readyInMinutes}} minutes</li>
-            <li>Servings: {{response.servings}}</li>
-            <li>Dishtype:</li>
-            <ul>
-                {% for type in response.dishTypes %}
-                <li>{{type}}</li>
-                {% endfor %}
-            </ul>
+        <h3>{{response.title}} <img id="single_recipe_img" src="{{response.image}}" alt="Recipe Image"></h3>
             {% autoescape off %}
-            <li>{{response.summary}}</li>
+            <p>Summary: {{response.summary}}</p>
             {% endautoescape %}
-        </ul>
             <p><a href="{{response.sourceUrl}}">Link to Recipe</a> | <a href="/get_similar/{{response.id}}">Find Similar Recipes!</a></p>
     </div>
 </body>

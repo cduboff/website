@@ -10,10 +10,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
          $(document).ready(function () {
-            $("#more_info").click(function (event) {
+            $(".more_info").click(function (event) {
                 console.log("clicked on link")
-                console.log("submitting request")
-                var recipe_id = (document.getElementById('recipe.id').textContent);
+                var recipe_id = $(this).get(0);
+                console.log("submitting request", recipe_id)
                 $.ajax({
                     url: '/find_recipe/' + recipe_id,
                     method: 'GET'
@@ -25,7 +25,7 @@
         });
     </script>
 </head>
-
+<!-- (document.getElementById('recipe.id').textContent) -->
 <body>
     <div class="container bg-light">
         <div class="row">
@@ -35,7 +35,7 @@
                 <div id="rec">
                     {% if saved %}
                     {% for recipe in saved %}
-                    <div id="more_info">
+                    <div class="more_info">
                         <p hidden id='recipe.id'>{{recipe.recipe}}</p>
                         <p>{{recipe.name}} <a href=# class="font-weight-light">See more</a></p>
                     </div>

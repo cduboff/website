@@ -91,8 +91,6 @@ def similar_recipe(request, id):
     return render(request, 'similar_recipes.html', context)
 
 def create(request):
-    if User not in request.session:
-        return redirect('/')
     if request.method == 'GET':
         return render(request, 'create_plan.html')
     if request.method == 'POST':

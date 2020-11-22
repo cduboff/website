@@ -35,14 +35,13 @@
                 <div id="rec">
                     {% if saved %}
                     {% for recipe in saved %}
+                    <div id="search_results"></div>
                     <div class="more_info">
                         <p hidden id='recipe.id'>{{recipe.recipe}}</p>
                         <p>{{recipe.name}} <a href=# class="font-weight-light">See more</a></p>
-                        <div id="search_results"></div>
                     </div>
                     {% endfor %}
                     {% endif %}
-                    <p><a href="/">Home</a> | <a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a></p>
                 </div>
             </div>
         </div>

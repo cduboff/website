@@ -6,12 +6,29 @@
     <title>Search by ingredient</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+         $(document).ready(function () {
+            $("#search").click(function (event) {
+                console.log("clicked on link")
+                var recipe_id = $(this).get(0).textContent.replace(/ /g, "").slice(0, 7);
+                console.log(recipe_id);
+                $.ajax({
+                    url: '/find_recipe/' + recipe_id,
+                    method: 'GET'
+                }).done(function (response) {
+                    $('#search_results').html(response)
+                });
+                return false
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="container bg-light">
         <div class="row">
             <div class="col p-4 m-1">
-                <p><a href="/">Home</a> | Welcome, <a href="/user_home">{{request.session.name}}</a></p>
+                <p><a href="/user_home">Home</a> | Welcome, {{request.session.name}}</p>
                 <form action="/submit" method="POST">
                     {% csrf_token %}
                     <h5>Submit up to 50 ingredients separated by commas and choose the desired number of recipes</h5>
@@ -23,10 +40,11 @@
                             <input type="text" class="form-control" placeholder=" Recipes 10-100" name="number">
                         </div>
                         <div class="form-group col-auto">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" id="search" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                 </form>
+                <div id="results"></div>
             </div>
         </div>
     </div>

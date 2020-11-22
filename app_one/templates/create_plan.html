@@ -7,7 +7,24 @@
     <title>Create Meal Plan</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-</head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+         $(document).ready(function () {
+            $("#add_day").click(function (event) {
+                console.log("submitted day's menu")
+                var recipe_id = $(this).get(0).textContent.replace(/ /g, "").slice(0, 7);
+                console.log(recipe_id);
+                $.ajax({
+                    url: '/find_recipe/' + recipe_id,
+                    method: 'GET'
+                }).done(function (response) {
+                    $('#search_results').html(response)
+                });
+                return false
+            });
+        });
+    </script>
+    </head>
 
 <body>
     <div class="container bg-light">
@@ -51,7 +68,8 @@
                     <!-- <label for="drink">Drink</label> -->
                     <input type="text" name="drink" id="drink" placeholder="Drink">
                 </div>
-            <!-- </div> -->
+                <!-- </div> -->
+            <input type="button" id="add_day" value="Add day">
             <input type="submit" value="Create Plan">
         </form>
     </div>

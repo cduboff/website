@@ -113,7 +113,7 @@ def logout(request):
 def find_recipe(request, id):
     response = requests.get(f'https://api.spoonacular.com/recipes/{id}/information?apiKey={secret.api_key}').json()
     print("Success!")
-    print(response)
+    # print(response)
     context = {
         'response': response,
     }

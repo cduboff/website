@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- (document.getElementById('recipe.id').textContent) -->
     <script>
          $(document).ready(function () {
             $(".more_info").click(function (event) {
                 console.log("clicked on link")
-                var recipe_id = $(this).get(0);
-                console.log("submitting request", recipe_id)
+                var recipe_id = $(this).get(0).textContent.replace(/ /g, "").slice(0, 7);
+                console.log(recipe_id);
                 $.ajax({
                     url: '/find_recipe/' + recipe_id,
                     method: 'GET'
@@ -25,7 +26,6 @@
         });
     </script>
 </head>
-<!-- (document.getElementById('recipe.id').textContent) -->
 <body>
     <div class="container bg-light">
         <div class="row">
@@ -38,8 +38,8 @@
                     <div class="more_info">
                         <p hidden id='recipe.id'>{{recipe.recipe}}</p>
                         <p>{{recipe.name}} <a href=# class="font-weight-light">See more</a></p>
+                        <div id="search_results"></div>
                     </div>
-                    <div id="search_results"></div>
                     {% endfor %}
                     {% endif %}
                     <p><a href="/">Home</a> | <a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a></p>

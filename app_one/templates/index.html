@@ -9,18 +9,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
          $(document).ready(function () {
-            $("#search").click(function (event) {
-                console.log("clicked on link")
-                var recipe_id = $(this).get(0).textContent.replace(/ /g, "").slice(0, 7);
-                console.log(recipe_id);
-                $.ajax({
-                    url: '/find_recipe/' + recipe_id,
-                    method: 'GET'
-                }).done(function (response) {
-                    $('#search_results').html(response)
-                });
-                return false
+            console.log('document is ready')
+            $('#search').on('/submit', function(event){
+                event.preventDefault();
+                console.log("form submitted!")  // sanity check
+                submit();
             });
+            function submit() {
+                console.log("create post is working!") // sanity check
+                console.log($('#post-text').val())
+                $.ajax({
+                    url : "/submit", // the endpoint
+                    type : "POST", // http method
+                    data : { search_content : $('#post-text').val().replace(' ', '+') }, // data sent with the post request
+
+        // handle a successful response
+                    success : function(json) {
+                        $('#post-text').val(''); // remove the value from the input
+                            console.log(json); // log the returned json to the console
+                            console.log("success"); // another sanity check
+                        },
+
+        // handle a non-successful response
+                    error : function(xhr,errmsg,err) {
+                        $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: " +errmsg+ " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+                        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                    }
+                });
+            };
         });
     </script>
 </head>
@@ -29,7 +45,12 @@
         <div class="row">
             <div class="col p-4 m-1">
                 <p><a href="/user_home">Home</a> | Welcome, {{request.session.name}}</p>
-                <form action="/submit" method="POST">
+                <form action="/submit" method="POST" id="search">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <!-- <form action="/submit" method="POST" id="search">
                     {% csrf_token %}
                     <h5>Submit up to 50 ingredients separated by commas and choose the desired number of recipes</h5>
                     <div class="form-row">
@@ -43,7 +64,7 @@
                             <button type="submit" id="search" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
-                </form>
+                </form> -->
                 <div id="results"></div>
             </div>
         </div>

@@ -3,7 +3,9 @@ import requests
 from .models import User, Saved, Weeks, Days, Meal
 from django.contrib import messages
 import bcrypt
-from . import secret    
+from . import secret
+from .forms import PostForm
+import json
 
 # Create your views here.
 def index(request):
@@ -55,19 +57,38 @@ def user_home(request):
     return render(request, 'user_home.html', context)
 
 def search(request):
-    return render(request, 'index.html')
+    form = PostForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'index.html', context)
 
 def submit(request):
-    q = request.POST['ingredients'].replace(" ", "+")
-    print(q)
-    n = request.POST['number']
-    api_response = requests.get(f'https://api.spoonacular.com/recipes/findByIngredients?apiKey={secret.api_key}&ingredients={q}&number={n}').json()
-    request.session['recipes'] = api_response
-    # print(request.session['recipes'])
-    # for recipe in request.session['recipes']:
-    #     # print(recipe['id'])
-    #     print(recipe)
-    return redirect(f'/response')
+    if request.method == 'POST':
+        q = request.POST.get('search_content')
+        print(q)
+        api_response = requests.get(f'https://api.spoonacular.com/recipes/findByIngredients?apiKey={secret.api_key}&ingredients={q}').json()
+        # request.session['recipes'] = api_response
+        # print(request.session['recipes'])
+        # for recipe in request.session['recipes']:
+        #     # print(recipe['id'])
+        #     print(recipe)
+        # return api_response
+        print(api_response)
+        response_data = {}
+
+        response_data['result'] = 'Search successful!'
+        # response_data['postpk'] = q.pk
+        response_data['ingredients'] = api_response
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+    else:
+        return HttpResponse(
+            json.dumps({"nothing to see": "this isn't happening"}),
+            content_type="application/json"
+        )
 
 def response(request):
     context = {

@@ -10,7 +10,7 @@
     <script>
          $(document).ready(function () {
             console.log('document is ready')
-            $('#search').on('/submit', function(event){
+            $('#search').click('/submit', function(event){
                 event.preventDefault();
                 console.log("form submitted!")  // sanity check
                 submit();
@@ -21,8 +21,8 @@
                 $.ajax({
                     url : "/submit", // the endpoint
                     type : "POST", // http method
-                    data : { search_content : $('#post-text').val().replace(' ', '+') }, // data sent with the post request
-
+                    data : { search_content : $('#post-text').val()}, // data sent with the post request
+                    // .replace(' ', '+') 
         // handle a successful response
                     success : function(json) {
                         $('#post-text').val(''); // remove the value from the input
@@ -45,10 +45,10 @@
         <div class="row">
             <div class="col p-4 m-1">
                 <p><a href="/user_home">Home</a> | Welcome, {{request.session.name}}</p>
-                <form action="/submit" method="POST" id="search">
+                <form action="/submit" method="POST">
                 {% csrf_token %}
                 {{ form }}
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" id="search">Submit</button>
                 </form>
                 <!-- <form action="/submit" method="POST" id="search">
                     {% csrf_token %}

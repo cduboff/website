@@ -9,4 +9,16 @@ class PostForm(forms.Form):
                 'placeholder': 'Say something...'
             }),
         }
-    ingredients = forms.CharField(label='Ingredients', max_length=255)
+    ingredients = forms.CharField(max_length=255)
+
+
+class MealPlanForm(forms.Form):
+    class Meta:
+        widgets = {
+            'text': forms.TextInput(attrs={
+                'id': 'meal_text',
+                'required': True,
+                'placeholder': 'Day of the week'
+            })
+        }
+    

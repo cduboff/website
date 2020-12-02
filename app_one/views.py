@@ -137,3 +137,20 @@ def find_recipe(request, id):
         'response': response,
     }
     return render(request, 'ajax_response.html', context)
+
+def connect_form(request):
+    return render(request, 'connect_user.html')
+
+def connect_user(request):
+    post_body = {
+        "username": request.POST['username'],
+        "firstName": request.POST['first_name'],
+        "lastName": request.POST['last_name'],
+    }
+    jsonData = json.dumps(post_body)
+    response = requests.post('https://api.spoonacular.com/users/connect', json=jsonData)
+    print(response)
+    context = {
+        'res': response,
+    }
+    return render(request, 'connected.html', context)

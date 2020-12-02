@@ -15,4 +15,6 @@ urlpatterns = [
     path('like/<int:id>', views.like),
     path('logout', views.logout),
     path('find_recipe/<int:id>', views.find_recipe),
+    path('connect_user', views.connect_user),
+    path('connect_form', views.connect_form),
 ]

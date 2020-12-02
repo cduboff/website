@@ -150,7 +150,5 @@ def connect_user(request):
     jsonData = json.dumps(post_body)
     response = requests.post('https://api.spoonacular.com/users/connect', json=jsonData)
     print(response)
-    context = {
-        'res': response,
-    }
+    
     return render(request, 'connected.html', context)

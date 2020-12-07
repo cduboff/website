@@ -139,7 +139,10 @@ def find_recipe(request, id):
     return render(request, 'ajax_response.html', context)
 
 def connect_form(request):
-    return render(request, 'connect_user.html')
+    context = {
+        'user': User.objects.get(id=request.session['user_id']),
+    }
+    return render(request, 'connect_user.html', context)
 
 def connect_user(request):
     post_body = {
@@ -148,7 +151,9 @@ def connect_user(request):
         "lastName": request.POST['last_name'],
     }
     jsonData = json.dumps(post_body)
-    response = requests.post('https://api.spoonacular.com/users/connect', json=jsonData)
-    print(response)
-    
+    requests.post(f'https://api.spoonacular.com/users/connect?apiKey={secret.api_key}', json=jsonData)
+    print(f'{0x00000206B0EA1310}')
+    context = {
+        'res': response
+    }
     return render(request, 'connected.html', context)

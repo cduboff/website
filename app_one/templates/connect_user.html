@@ -8,9 +8,9 @@
 <body>
     <form action="/connect_user" method="POST">
         {% csrf_token %}
-        <input type="text" name="username" value="" hidden>
-        <input type="text" name="first_name" value="" hidden>
-        <input type="text" name="last_name" value="" hidden>
+        <input type="text" name="username" value="{{user.username}}">
+        <input type="text" name="first_name" value="{{user.first_name}}">
+        <input type="text" name="last_name" value="{{user.last_name}}">
         <input type="submit" value="Connect User">
     </form>
 </body>

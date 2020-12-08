@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <!-- (document.getElementById('recipe.id').textContent) -->
+    <!-- (document.getElementById('recipe.id').textContent) -->
     <script>
-         $(document).ready(function () {
+        $(document).ready(function () {
             $(".more_info").click(function (event) {
                 console.log("clicked on link")
                 var recipe_id = $(this).get(0).textContent.replace(/ /g, "").slice(0, 7);
@@ -26,11 +26,20 @@
         });
     </script>
 </head>
+
 <body>
     <div class="container bg-light">
         <div class="row">
             <div class="col p-4 m-1">
-                <p><a href="/create_meal_plan"> Create a meal plan for the next month</a> | <a href="/search">Search for recipes by ingredients</a> | <a href="/logout">Logout</a></p>
+                <p>
+                <form action="/connect_user" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="username" value="{{user.username}}" hidden>
+                    <input type="text" name="first_name" value="{{user.first_name}}" hidden>
+                    <input type="text" name="last_name" value="{{user.last_name}}" hidden>
+                    <input type="submit" value="Begin Meal Plan">
+                </form>
+                | <a href="/search">Search for recipes by ingredients</a> | <a href="/logout">Logout</a></p>
                 <h3>Welcome {{request.session.name}}</h3>
                 <div id="rec">
                     {% if saved %}

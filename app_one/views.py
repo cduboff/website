@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 import requests
-from .models import User, Saved, Weeks, Days, Meal
+from .models import User, Saved, Weeks, Days, Meal, ConnectedUser
 from django.contrib import messages
 import bcrypt
 from . import secret
@@ -111,12 +111,6 @@ def similar_recipe(request, id):
     }
     return render(request, 'similar_recipes.html', context)
 
-def create(request):
-    if request.method == 'GET':
-        return render(request, 'create_plan.html')
-    if request.method == 'POST':
-        # Create new meal plan
-        return HttpResponse('This is a post request')
 
 def like(request, id):
     if not Saved.objects.authenticate(recipe=id):
@@ -145,15 +139,10 @@ def connect_form(request):
     return render(request, 'connect_user.html', context)
 
 def connect_user(request):
-    post_body = {
-        "username": request.POST['username'],
-        "firstName": request.POST['first_name'],
-        "lastName": request.POST['last_name'],
-    }
-    jsonData = json.dumps(post_body)
-    requests.post(f'https://api.spoonacular.com/users/connect?apiKey={secret.api_key}', json=jsonData)
-    print(f'{0x00000206B0EA1310}')
-    context = {
-        'res': response
-    }
-    return render(request, 'connected.html', context)
+    response = requests.post(f'https://api.spoonacular.com/users/connect?apiKey={secret.api_key}', json={'username': request.POST['username'], 'first_name': request.POST['first_name'], 'last_name': request.POST['last_name']}).json()
+    print(response)
+    ConnectedUser.objects.create(username=response['username'], hash=response['hash'], user=User.objects.get(id=request.session['user_id']))
+    return redirect('/create_meal_plan')
+
+def create(request):
+    return redirect('/connect_user')

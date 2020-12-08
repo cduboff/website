@@ -47,6 +47,11 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
 
+class ConnectedUser(models.Model):
+    username = models.TextField()
+    hash = models.TextField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
 class Saved(models.Model):
     recipe = models.IntegerField()
     name = models.CharField(max_length=255)

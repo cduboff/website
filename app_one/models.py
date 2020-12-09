@@ -50,7 +50,7 @@ class User(models.Model):
 class ConnectedUser(models.Model):
     username = models.TextField()
     hash = models.TextField()
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, related_name="user_id", on_delete=models.CASCADE)
 
 class Saved(models.Model):
     recipe = models.IntegerField()

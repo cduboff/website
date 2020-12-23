@@ -174,10 +174,13 @@ def connect_user(request):
 def create(request):
     user = User.objects.get(id=request.session['user_id'])
     response = requests.get(f'https://api.spoonacular.com/mealplanner/public-templates?apiKey={secret.api_key}', json={'username': user.user_id.username, 'hash': user.user_id.hash}).json()
-    plan = requests.post(f'https://api.spoonacular.com/mealplanner/{user.user_id.username}/items?apiKey={secret.api_key}/username={user.user_id.username}/hash={user.user_id.hash}', json={'mealPlanTemplateId': 2779, 'startDate': 1596575356}).json()
-    print(plan)
+    plan = requests.post(f'https://api.spoonacular.com/mealplanner/{user.user_id.username}/items?apiKey={secret.api_key}/username={user.user_id.username}/hash={user.user_id.hash}', json={'mealPlanTemplateId': 2779, 'startDateapiKey={secret.api_key}': 1596575356}).json()
+    new_plan = requests.get(f'https://api.spoonacular.com/mealplanner/generate?apiKey={secret.api_key}/timeFrame=day').json()
+    print(new_plan)
+    # print(plan)
     context = {
         'res': response['templates'],
-        'plan': plan
+        'plan': plan,
+        'new_plan': new_plan,
     }
     return render(request, 'create_plan.html', context)

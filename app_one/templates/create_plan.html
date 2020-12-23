@@ -29,12 +29,12 @@
 <body>
     <div class="container bg-light">
         <a href="/user_home">Home</a>
-        {{res}}
-        <ul>
+        {{plan}}
+        <!-- <ul>
             {% for res in res %}
             <li>{{res.name}}</li>
             {% endfor %}
-        </ul>
+        </ul> -->
 
         <form action="/create_meal_plan" method="POST">
             {% csrf_token %}
